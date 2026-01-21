@@ -16,6 +16,7 @@ mod models;
 mod github;
 mod rate_limiter;
 mod app_state;
+include!(concat!(env!("OUT_DIR"), "/templates.rs"));
 
 use models::RecipeStore;
 use rate_limiter::RateLimiter;
@@ -24,21 +25,11 @@ use app_state::AppState;
 
 
 async fn serve_index() -> impl IntoResponse {
-    let html = if cfg!(debug_assertions) {
-        std::fs::read_to_string("templates/index.html").unwrap()
-    } else {
-        std::fs::read_to_string(format!("{}/index.min.html", env!("OUT_DIR"))).unwrap()
-    };
-    Html(html)
+    Html(INDEX_HTML)
 }
 
 async fn serve_404() -> impl IntoResponse {
-    let html = if cfg!(debug_assertions) {
-        std::fs::read_to_string("templates/404.html").unwrap()
-    } else {
-        std::fs::read_to_string(format!("{}/404.min.html", env!("OUT_DIR"))).unwrap()
-    };
-    (StatusCode::NOT_FOUND, Html(html))
+    (StatusCode::NOT_FOUND, Html(NOT_FOUND_HTML))
 }
 
 #[tokio::main]

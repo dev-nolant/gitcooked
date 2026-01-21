@@ -62,10 +62,26 @@ fn minify_html(html: &str) -> String {
     result
 }
 
-fn minify_template(source_path: &Path, dest_path: &Path) {
+fn embed_html_as_rust_code(source_path: &Path, name: &str, out_dir: &Path) {
     let html = fs::read_to_string(source_path).expect("Failed to read template");
     let minified = minify_html(&html);
-    fs::write(dest_path, minified).expect("Failed to write minified template");
+    let escaped = minified.replace('\\', "\\\\").replace('"', "\\\"");
+
+    let rust_code = format!(
+        r#"pub const {}: &str = "{}";"#,
+        name.to_uppercase(),
+        escaped
+    );
+
+    let templates_path = out_dir.join("templates.rs");
+    let mut content = if templates_path.exists() {
+        fs::read_to_string(&templates_path).expect("Failed to read templates.rs")
+    } else {
+        String::new()
+    };
+    content.push('\n');
+    content.push_str(&rust_code);
+    fs::write(&templates_path, content).expect("Failed to write templates.rs");
 }
 
 fn main() {
@@ -74,15 +90,11 @@ fn main() {
 
     fs::create_dir_all(&out_dir).expect("Failed to create output directory");
 
-    minify_template(
-        &templates_dir.join("index.html"),
-        &out_dir.join("index.min.html"),
-    );
+    let templates_path = out_dir.join("templates.rs");
+    fs::write(&templates_path, "").expect("Failed to clear templates.rs");
 
-    minify_template(
-        &templates_dir.join("404.html"),
-        &out_dir.join("404.min.html"),
-    );
+    embed_html_as_rust_code(&templates_dir.join("index.html"), "index_html", &out_dir);
+    embed_html_as_rust_code(&templates_dir.join("404.html"), "not_found_html", &out_dir);
 
     println!("cargo:rerun-if-changed=templates/index.html");
     println!("cargo:rerun-if-changed=templates/404.html");
