@@ -98,4 +98,5 @@ fn main() {
 
     println!("cargo:rerun-if-changed=templates/index.html");
     println!("cargo:rerun-if-changed=templates/404.html");
+    println!("cargo:rerun-if-changed=public/logo/logo.png");
 }
