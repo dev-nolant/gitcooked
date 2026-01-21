@@ -1,0 +1,21 @@
+{
+  "id": "e6d6e07e-6dd8-4438-8921-345423ff09c5",
+  "title": "Classic Grilled Cheese",
+  "description": "A simple but perfect grilled cheese sandwich",
+  "ingredients": [
+    "2 slices bread",
+    "2 slices cheddar cheese",
+    "2 tbsp butter"
+  ],
+  "instructions": [
+    "Butter one side of each bread slice",
+    "Place cheese between unbuttered sides",
+    "Cook on medium heat for 3-4 minutes each side until golden brown"
+  ],
+  "tags": [
+    "comfort food",
+    "quick"
+  ],
+  "created_at": "2026-01-20T23:54:18.922826Z",
+  "updated_at": "2026-01-20T23:54:18.922826Z"
+}

@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>gitcooked.com</title>
+    <link rel="icon" type="image/png" href="/public/logo/logo.png">
+    <meta http-equiv="Cache-Control" content="public, max-age=31536000">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            height: 100%;
+        }
+        
+        body {
+            min-height: 100%;
+            background-color: #e6e6e6;
+            color: #333;
+            font-family: 'Lucida Console', Monaco, monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            padding: 20px;
+            max-width: 980px;
+            margin: 0 auto;
+        }
+        
+        a {
+            color: #4183c4;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        h1 {
+            font-size: 30px;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+        
+        h2 {
+            font-size: 20px;
+            margin: 20px 0 10px 0;
+            font-weight: 300;
+        }
+        
+        h3 {
+            font-size: 16px;
+            margin: 15px 0 5px 0;
+            font-weight: 300;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 a {
+            color: #333;
+        }
+        
+        .header h1 a:hover {
+            color: #4183c4;
+        }
+        
+        .tagline {
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .search-container {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .search-container input {
+            width: 100%;
+            max-width: 400px;
+            padding: 8px;
+            font-family: 'Lucida Console', Monaco, monospace;
+            font-size: 13px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        
+        .search-container input:focus {
+            outline: none;
+            border-color: #4183c4;
+        }
+        
+        .nav {
+            margin-bottom: 20px;
+            font-size: 12px;
+        }
+        
+        .nav a {
+            margin-right: 15px;
+        }
+        
+        .recipe-list {
+            margin-bottom: 20px;
+        }
+        
+        .recipe-item {
+            margin-bottom: 8px;
+        }
+        
+        .recipe-title {
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        .recipe-meta {
+            font-size: 12px;
+            color: #666;
+            margin-left: 10px;
+        }
+        
+        .recipe-actions {
+            margin-left: 10px;
+            font-size: 12px;
+        }
+        
+        .recipe-actions a {
+            margin-left: 10px;
+            color: #666;
+        }
+        
+        .recipe-actions a:hover {
+            color: #333;
+        }
+        
+        .recipe-detail {
+            margin-bottom: 30px;
+        }
+        
+        .recipe-detail h1 {
+            margin-bottom: 5px;
+        }
+        
+        .recipe-detail .description {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        .recipe-detail ul,
+        .recipe-detail ol {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .recipe-detail li {
+            margin-bottom: 5px;
+        }
+        
+        .recipe-detail .meta {
+            font-size: 12px;
+            color: #666;
+            margin-top: 10px;
+        }
+        
+        .recommended {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e5e5e5;
+        }
+        
+        .recommended h3 {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .recommended ul {
+            list-style: none;
+            margin-left: 0;
+        }
+        
+        .recommended li {
+            margin-bottom: 5px;
+        }
+        
+        .recommended a {
+            color: #4183c4;
+        }
+        
+        .add-recipe {
+            margin-bottom: 30px;
+        }
+        
+        .add-recipe label {
+            display: block;
+            margin: 10px 0 5px 0;
+            font-weight: bold;
+        }
+        
+        .add-recipe input,
+        .add-recipe textarea {
+            width: 100%;
+            padding: 5px;
+            font-family: 'Lucida Console', Monaco, monospace;
+            font-size: 13px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        
+        .add-recipe textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+        
+        .add-recipe button {
+            margin-top: 10px;
+            padding: 6px 12px;
+            font-family: 'Lucida Console', Monaco, monospace;
+            font-size: 13px;
+            background: #609818;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .add-recipe button:hover {
+            background: #5a8c16;
+        }
+        
+        .loading {
+            color: #666;
+        }
+        
+        .error {
+            color: #990000;
+            background: #ffeef0;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        
+        hr {
+            border: none;
+            border-top: 1px solid #e5e5e5;
+            margin: 20px 0;
+        }
+        
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e5e5e5;
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+                font-size: 13px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            h2 {
+                font-size: 18px;
+            }
+            
+            h3 {
+                font-size: 14px;
+            }
+            
+            .nav a {
+                margin-right: 10px;
+                font-size: 11px;
+            }
+            
+            .recipe-item {
+                display: block;
+                margin-bottom: 15px;
+            }
+            
+            .recipe-title {
+                display: block;
+                font-size: 15px;
+                margin-bottom: 3px;
+            }
+            
+            .recipe-meta {
+                display: block;
+                margin-left: 0;
+                margin-bottom: 3px;
+            }
+            
+            .recipe-actions {
+                display: block;
+                margin-left: 0;
+            }
+            
+            .recipe-actions a {
+                margin-right: 10px;
+            }
+            
+            .add-recipe input,
+            .add-recipe textarea {
+                font-size: 14px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 20px;
+            }
+            
+            h2 {
+                font-size: 16px;
+            }
+            
+            .nav {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            
+            .nav a {
+                margin-right: 0;
+            }
+            
+            .search-container input {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="/public/logo/logo.png" alt="gitcooked logo" style="width: 80px; height: auto; display: block; margin: 0 auto 0 auto;">
+        <h1><a href="/recipes">gitcooked.com</a></h1>
+        <div class="tagline">developers have to eat, too</div>
+    </div>
+    
+    <div class="search-container">
+        <input type="text" id="search" placeholder="Search recipes by title or tags..." onkeyup="searchRecipes()">
+    </div>
+    
+    <div class="nav">
+        <a href="/recipes">Recipes</a>
+        <a href="/add">Add Recipe</a>
+    </div>
+    
+    <hr>
+    
+    <div id="app">
+        <div class="loading">Loading recipes...</div>
+    </div>
+    
+    <div class="footer">
+        <a href="https://github.com/dev-nolant/gitcooked" target="_blank">View on GitHub</a>
+    </div>
+
+    <script>
+        const API_BASE = '/api/recipes';
+        let allRecipes = [];
+        
+        async function loadRecipes() {
+            try {
+                const response = await fetch(API_BASE);
+                allRecipes = await response.json();
+                renderRecipes(allRecipes);
+            } catch (error) {
+                document.getElementById('app').innerHTML = `<div class="error">Error loading recipes: ${error.message}</div>`;
+            }
+        }
+        
+        function searchRecipes() {
+            const query = document.getElementById('search').value.toLowerCase().trim();
+            
+            if (query === '') {
+                renderRecipes(allRecipes);
+                return;
+            }
+            
+            const filtered = allRecipes.filter(recipe => {
+                const titleMatch = recipe.title.toLowerCase().includes(query);
+                const tagsMatch = recipe.tags.some(tag => tag.toLowerCase().includes(query));
+                return titleMatch || tagsMatch;
+            });
+            
+            renderRecipes(filtered);
+        }
+        
+        function showRecipes() {
+            window.history.pushState({}, '', '/recipes');
+            loadRecipes();
+        }
+        
+        function renderRecipes(recipes) {
+            const app = document.getElementById('app');
+            
+            let html = '<div class="recipe-list">';
+            
+            if (recipes.length === 0) {
+                html += '<p>No recipes yet. <a href="/add">Add one</a>.</p>';
+            } else {
+                recipes.forEach(recipe => {
+                    const date = new Date(recipe.created_at).toLocaleDateString();
+                    const tags = recipe.tags.length > 0 ? recipe.tags.map(t => escapeHtml(t)).join(', ') : 'none';
+                    
+                    html += '<div class="recipe-item">';
+                    html += `<span class="recipe-title"><a href="/recipe/${recipe.id}">${escapeHtml(recipe.title)}</a></span>`;
+                    html += `<span class="recipe-meta">${date} | tags: ${tags}</span>`;
+                    html += '<span class="recipe-actions">';
+                    html += `<a href="${API_BASE}/${recipe.id}/markdown" download="${recipe.title.replace(/[^a-z0-9]/gi, '_')}.md">md</a>`;
+                    html += '</span>';
+                    html += '</div>';
+                });
+            }
+            
+            html += '</div>';
+            
+            app.innerHTML = html;
+        }
+        
+        function showAddRecipe() {
+            window.history.pushState({}, '', '/add');
+            renderAddRecipe();
+        }
+        
+        function renderAddRecipe() {
+            const app = document.getElementById('app');
+            
+            let html = '<div class="add-recipe">';
+            html += '<h2>Add Recipe</h2>';
+            html += '<label>Title:</label>';
+            html += '<input type="text" id="title" required><br>';
+            html += '<label>Description:</label>';
+            html += '<textarea id="description" required></textarea><br>';
+            html += '<label>Ingredients (one per line):</label>';
+            html += '<textarea id="ingredients" required></textarea><br>';
+            html += '<label>Instructions (one per line):</label>';
+            html += '<textarea id="instructions" required></textarea><br>';
+            html += '<label>Tags (comma separated):</label>';
+            html += '<input type="text" id="tags"><br>';
+            html += '<button type="button" onclick="addRecipe()">Add Recipe</button>';
+            html += ' <a href="/recipes">cancel</a>';
+            html += '</div>';
+            
+            app.innerHTML = html;
+        }
+        
+        async function addRecipe() {
+            const title = document.getElementById('title').value;
+            const description = document.getElementById('description').value;
+            const ingredients = document.getElementById('ingredients').value.split('\n').filter(i => i.trim());
+            const instructions = document.getElementById('instructions').value.split('\n').filter(i => i.trim());
+            const tags = document.getElementById('tags').value.split(',').map(t => t.trim()).filter(t => t);
+            
+            if (!title || !description || ingredients.length === 0 || instructions.length === 0) {
+                alert('Please fill in all required fields');
+                return;
+            }
+            
+            try {
+                const response = await fetch(`${API_BASE}/issue`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ title, description, ingredients, instructions, tags })
+                });
+                
+                if (!response.ok) {
+                    const text = await response.text();
+                    alert('Error adding recipe: ' + text);
+                    return;
+                }
+                
+                const data = await response.json();
+                
+                if (data.issue_url) {
+                    window.location.href = data.issue_url;
+                } else {
+                    alert('Error generating GitHub issue URL');
+                }
+            } catch (error) {
+                alert('Error adding recipe: ' + error.message);
+            }
+        }
+        
+        async function deleteRecipe(id) {
+            if (!confirm('Delete this recipe?')) return;
+            
+            try {
+                await fetch(`${API_BASE}/${id}`, { method: 'DELETE' });
+                loadRecipes();
+            } catch (error) {
+                alert('Error deleting recipe: ' + error.message);
+            }
+        }
+        
+        async function viewRecipe(id) {
+            window.history.pushState({}, '', `/recipe/${id}`);
+            renderRecipe(id);
+        }
+        
+        async function renderRecipe(id) {
+            try {
+                const response = await fetch(`${API_BASE}/${id}`);
+                
+                if (!response.ok) {
+                    document.getElementById('app').innerHTML = `
+                        <div class="error">
+                            <h2>Recipe Not Found</h2>
+                            <p>The recipe you're looking for has been whisked away...</p>
+                            <p><a href="/recipes">← Browse all recipes</a></p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                const recipe = await response.json();
+                
+                const allRecipesResponse = await fetch(API_BASE);
+                const allRecipes = await allRecipesResponse.json();
+                
+                let html = '<div class="recipe-detail">';
+                html += `<h1>${escapeHtml(recipe.title)}</h1>`;
+                html += `<div class="description">${escapeHtml(recipe.description)}</div>`;
+                html += '<h3>Ingredients</h3><ul>';
+                recipe.ingredients.forEach(ing => {
+                    html += `<li>${escapeHtml(ing)}</li>`;
+                });
+                html += '</ul>';
+                html += '<h3>Instructions</h3><ol>';
+                recipe.instructions.forEach(inst => {
+                    html += `<li>${escapeHtml(inst)}</li>`;
+                });
+                html += '</ol>';
+                html += '<div class="meta">';
+                html += `Tags: ${recipe.tags.map(t => escapeHtml(t)).join(', ')} | `;
+                html += `Created: ${new Date(recipe.created_at).toLocaleDateString()} | `;
+                html += `<a href="${API_BASE}/${recipe.id}/markdown" download="${recipe.title.replace(/[^a-z0-9]/gi, '_')}.md">download</a>`;
+                html += '</div></div>';
+                
+                const otherRecipes = allRecipes.filter(r => r.id !== id);
+                if (otherRecipes.length > 0) {
+                    html += '<div class="recommended">';
+                    html += '<h3>Recommended Recipes</h3>';
+                    html += '<ul>';
+                    otherRecipes.slice(0, 5).forEach(other => {
+                        html += `<li><a href="/recipe/${other.id}">${escapeHtml(other.title)}</a></li>`;
+                    });
+                    html += '</ul>';
+                    html += '</div>';
+                }
+                
+                document.getElementById('app').innerHTML = html;
+            } catch (error) {
+                document.getElementById('app').innerHTML = `
+                    <div class="error">
+                        <h2>Error</h2>
+                        <p>Failed to load recipe: ${escapeHtml(error.message)}</p>
+                        <p><a href="/recipes">← Browse all recipes</a></p>
+                    </div>
+                `;
+            }
+        }
+        
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+        
+        function router() {
+            const path = window.location.pathname;
+            
+            if (path === '/' || path === '/recipes') {
+                loadRecipes();
+            } else if (path === '/add') {
+                renderAddRecipe();
+            } else if (path.startsWith('/recipe/')) {
+                const id = path.split('/')[2];
+                renderRecipe(id);
+            } else {
+                loadRecipes();
+            }
+        }
+        
+        window.addEventListener('popstate', router);
+        document.addEventListener('DOMContentLoaded', router);
+        
+        document.querySelectorAll('a[href^="/"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                if (!this.hasAttribute('download')) {
+                    e.preventDefault();
+                    const href = this.getAttribute('href');
+                    window.history.pushState({}, '', href);
+                    router();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

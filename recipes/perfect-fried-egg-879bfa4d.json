@@ -1,0 +1,23 @@
+{
+  "id": "879bfa4d-b73d-4b20-bf6a-78d38ea2d748",
+  "title": "Perfect Fried Egg",
+  "description": "The foolproof method for a perfectly fried egg",
+  "ingredients": [
+    "1 egg",
+    "1 tbsp butter or oil",
+    "Salt and pepper to taste"
+  ],
+  "instructions": [
+    "Heat butter in non-stick pan over medium-low heat",
+    "Crack egg into pan",
+    "Cook until white is set and yolk is desired consistency",
+    "Season with salt and pepper"
+  ],
+  "tags": [
+    "breakfast",
+    "quick",
+    "easy"
+  ],
+  "created_at": "2026-01-20T23:54:18.923292Z",
+  "updated_at": "2026-01-20T23:54:18.923292Z"
+}

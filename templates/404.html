@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Recipe Not Found | gitcooked.com</title>
+    <link rel="icon" type="image/png" href="/public/logo/logo.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            height: 100%;
+        }
+        
+        body {
+            min-height: 100%;
+            background-color: #e6e6e6;
+            color: #333;
+            font-family: 'Lucida Console', Monaco, monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            padding: 20px;
+            max-width: 980px;
+            margin: 0 auto;
+            text-align: center;
+            padding-top: 100px;
+        }
+        
+        a {
+            color: #4183c4;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+        
+        .pun {
+            font-size: 18px;
+            color: #666;
+            margin: 30px 0;
+            font-style: italic;
+            min-height: 30px;
+        }
+        
+        .back-link {
+            font-size: 14px;
+            margin-top: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding-top: 50px;
+            }
+            
+            h1 {
+                font-size: 36px;
+            }
+            
+            .pun {
+                font-size: 16px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding-top: 30px;
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 28px;
+            }
+            
+            .pun {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>404</h1>
+    <div class="pun" id="pun"></div>
+    <div class="back-link">
+        <a href="/recipes">← Back to recipes</a>
+    </div>
+
+    <script>
+        const puns = [
+            "This recipe has been whisked away...",
+            "Something's soured in the kitchen...",
+            "Your recipe is toast...",
+            "We've buttered our fingers on this one...",
+            "This page has gone stale...",
+            "The recipe is in a jam...",
+            "We've hit a snail's pace finding this...",
+            "This recipe is under pressure and couldn't handle it...",
+            "We've cracked... not like an egg, but still...",
+            "This recipe is past its expiration date...",
+            "The kitchen staff is lost in the sauce...",
+            "We're wok-ing on it, but it's taking too long...",
+            "This recipe is missing its main ingredient...",
+            "Something fishy's going on in the kitchen...",
+            "We've got a bad egg in the carton...",
+            "The recipe file got burned...",
+            "We're in a bit of a pickle with this one...",
+            "The soufflé has collapsed...",
+            "We're toast on this one...",
+            "The kitchen's closed, try back tomorrow...",
+            "This recipe went up in smoke...",
+            "We're in hot water with this request...",
+            "The server is a little fried right now...",
+            "Something's gone bananas in the kitchen...",
+            "We've hit a crust with this one...",
+            "The page has been peeled away...",
+            "We're simmering on the answer...",
+            "This recipe got lost in translation...",
+            "The chef quit mid-recipe...",
+            "We're out of our depth with this one...",
+            "Something's rotten in the state of...",
+            "We've egg-sted ourselves with this error...",
+            "The kitchen is in a whirlpool of confusion...",
+            "This page got battered and fried...",
+            "We're stewing over this mistake...",
+            "The recipe is on the back burner...",
+            "We've poached the wrong URL...",
+            "This page got sautéed by accident...",
+            "We're roasting over this one...",
+            "The recipe is under-seasoned with error...",
+            "We've grilled the wrong page...",
+            "The server is feeling saucy today...",
+            "This page got broiled by the firewall...",
+            "We're baking up a new solution...",
+            "The recipe needs more time to rise...",
+            "We've mixed up the ingredients...",
+            "This page got folded in wrong...",
+            "We're kneading through the data...",
+            "The kitchen's in a scramble...",
+            "This recipe needs more whisking...",
+            "We've lost our zest for this page...",
+            "The server is on the back burner...",
+            "This page got marinated in 404 sauce...",
+            "We're glazing over the details...",
+            "The recipe is half-baked...",
+            "We've strained to find this page...",
+            "The server's a bit flaky today...",
+            "This page got separated from the herd...",
+            "We're emulsifying the error logs...",
+            "The recipe's been reduced to nothing...",
+            "We're tempering our response...",
+            "This page got caramelized by the server...",
+            "We're folding in a new pun...",
+            "The recipe's too stiff, needs more practice...",
+            "We've scored the wrong URL...",
+            "This page got deglazed by the browser...",
+            "We're confiting our patience...",
+            "The kitchen's mise en place is a mess...",
+            "This page got garnished with error...",
+            "We're plating up a 404 for you...",
+            "The recipe's gone past al dente...",
+            "We're brining for a new solution...",
+            "This page got pickled by the firewall...",
+            "We're fermenting a response...",
+            "The kitchen's in full boil...",
+            "This recipe got reduced too far...",
+            "We're making a roux of the situation...",
+            "The page got strained out...",
+            "We're skimming the error logs...",
+            "This recipe's lost its foam...",
+            "We're simmering down to nothing...",
+            "The server's boiling over...",
+            "This page got steeped in error...",
+            "We're infusing a better pun next time...",
+            "The recipe's gone cold...",
+            "We're chilling with this 404...",
+            "This page got frozen in time...",
+            "We're thawing our response...",
+            "The kitchen's a bit icy today...",
+            "This recipe got creamed by the server...",
+            "We're whipping up a new page..."
+        ];
+        
+        function getRandomPun() {
+            const randomIndex = Math.floor(Math.random() * puns.length);
+            const punElement = document.getElementById('pun');
+            if (punElement) {
+                punElement.textContent = puns[randomIndex];
+            }
+        }
+        
+        window.addEventListener('DOMContentLoaded', getRandomPun);
+    </script>
+</body>
+</html>
