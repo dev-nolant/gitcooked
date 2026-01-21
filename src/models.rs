@@ -1,8 +1,9 @@
 use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
+use std::collections::hash_map::DefaultHasher;
 use std::fs;
+use std::hash::{Hash, Hasher};
 use std::path::Path;
-use uuid::Uuid;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Recipe {
@@ -25,9 +26,17 @@ impl Recipe {
         tags: Vec<String>,
     ) -> Self {
         let now = Utc::now();
-        let namespace = Uuid::NAMESPACE_DNS;
         let content = format!("{}|{}", title, description);
-        let id = Uuid::new_v5(&namespace, content.as_bytes()).to_string();
+        let mut hasher = DefaultHasher::new();
+        content.hash(&mut hasher);
+        let hash = hasher.finish();
+        let id = format!("{:016x}-{:04x}-{:04x}-{:04x}-{:012x}",
+            hash >> 48,
+            (hash >> 32) & 0xffff,
+            (hash >> 16) & 0xffff,
+            hash & 0xffff,
+            (hash as u128).wrapping_mul(0x5bf03635) & 0xffffffffffff
+        );
         Self {
             id,
             title,
