@@ -25,8 +25,11 @@ impl Recipe {
         tags: Vec<String>,
     ) -> Self {
         let now = Utc::now();
+        let namespace = Uuid::NAMESPACE_DNS;
+        let content = format!("{}|{}", title, description);
+        let id = Uuid::new_v5(&namespace, content.as_bytes()).to_string();
         Self {
-            id: Uuid::new_v4().to_string(),
+            id,
             title,
             description,
             ingredients,
