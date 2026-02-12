@@ -43,9 +43,7 @@ how it works:
 4. push to main
 5. site rebuilds automatically
 6. recipe appears
-
-no tokens. no oauth. no "please authenticate to continue" nonsense.
-
+   
 ## recipe format
 
 each recipe is a json file in `/recipes/`. here's what they look like:
